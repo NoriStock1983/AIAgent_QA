@@ -1,36 +1,67 @@
-# This is a basic workflow to help you get started with Actions
+name: Python Code Quality
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ main, develop ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main, develop ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  lint_Static_Analysis:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    strategy:
+      matrix:
+        python-version: ['3.13.2']  # 必要に応じて複数バージョンを追加可能
+    
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # 静的解析ツールをインストール
+        pip install flake8
+    
+    # flake8による静的解析
+    - name: Run flake8
+      run: |
+        # デフォルト設定で実行（設定ファイルがある場合は自動で読み込まれる）
+        flake8 . --count --show-source --statistics
+    
+    # 将来のツール追加用のプレースホルダー（コメントアウト状態）
+    - name: Run black (code formatting check)
+      run: |
+         pip install black
+         black --check --diff .
+    
+    - name: Run mypy (type checking)
+            # 静的型チェック
+      run: |
+         pip install mypy
+         mypy .
+    
+    - name: Run bandit (security check)
+      run: |
+        pip install bandit
+        bandit -r . -f json -o bandit-report.json || true
+    
+    - name: Upload bandit results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: bandit-results
+        path: bandit-report.json
