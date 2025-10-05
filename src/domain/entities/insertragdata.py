@@ -1,6 +1,4 @@
 from dataclasses import dataclass
-import datetime
-
 from domain.value_objects.embedding import Embedding
 from domain.value_objects.main_category_code import MainCategoryCode
 from domain.value_objects.main_category_name import MainCategoryName

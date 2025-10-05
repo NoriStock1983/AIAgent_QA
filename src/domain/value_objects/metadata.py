@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from typing import Dict, Any
 import json
 
+
 @dataclass(frozen=True)
 class MetaData:
     value: Dict[str, Any] = field(default_factory=dict)

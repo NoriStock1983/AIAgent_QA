@@ -1,12 +1,9 @@
-import os
 from dotenv import load_dotenv
-from langchain_core.load.serializable import Serializable
 from langchain_google_genai import GoogleGenerativeAIEmbeddings  # 変更
 from sqlalchemy import text
 from domain.entities.insertragdata import InsertRagData
 from domain.entities.searchCondition import SearchCondition
 from domain.repositories.rag_repository_interface import RAGRepositoryInterface
-    
 from infrastructures.dbaccess import DBAccess
 
 
@@ -18,7 +15,6 @@ class RAGRepository(RAGRepositoryInterface):
         self.embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
 
     def search(self, search_condition: SearchCondition) -> str:
-
         dbaccess = DBAccess()
         engine = dbaccess.get_engine()
 
@@ -32,9 +28,7 @@ class RAGRepository(RAGRepositoryInterface):
             # SQLで取得した内容の中から、Contentsの内容を抜き出し、それを戻り値として返す。
             return result.fetchall()[0][2]
 
-
     def insert(self, insert_rag_data: InsertRagData):
-
         main_category_code = insert_rag_data.get_main_category_code()
         main_category_name = insert_rag_data.get_main_category_name()
         sub_category_code = insert_rag_data.get_sub_category_code()
@@ -48,10 +42,9 @@ class RAGRepository(RAGRepositoryInterface):
         engine = dbaccess.get_engine()
 
         with engine.connect() as conn:
-            conn.execute(text("INSERT INTO qa_order (main_category_code,main_category_name,sub_category_code,sub_category_name,question, contents, embedding,metadata) VALUES (:main_category_code,:main_category_name,:sub_category_code,:sub_category_name,:question, :contents, :embedding,:metadata)"), {"main_category_code": main_category_code,"main_category_name": main_category_name,"sub_category_code":sub_category_code,"sub_category_name":sub_category_name,"question": question,"contents": contents, "embedding": embedding,"metadata": metadata})
+            conn.execute(text("INSERT INTO qa_order (main_category_code,main_category_name,sub_category_code,sub_category_name,question, contents, embedding,metadata) VALUES (:main_category_code,:main_category_name,:sub_category_code,:sub_category_name,:question, :contents, :embedding,:metadata)"), {"main_category_code": main_category_code, "main_category_name": main_category_name, "sub_category_code": sub_category_code, "sub_category_name": sub_category_name, "question": question, "contents": contents, "embedding": embedding, "metadata": metadata})
             conn.commit()
         # ここにデータベースへの挿入処理を記述します
-
 
     def create_embedding(self, data: str):  # メソッド名を規約に合わせて変更
         # embed_queryメソッドを使って単一テキストの埋め込みを生成

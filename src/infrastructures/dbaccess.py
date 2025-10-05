@@ -1,11 +1,9 @@
-
 import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
 
-class DBAccess(): 
-
+class DBAccess():
     def __init__(self):
         load_dotenv()
 
@@ -15,8 +13,7 @@ class DBAccess():
         port = os.getenv("POSTGRES_PORT")
         dbname = os.getenv("POSTGRES_DB")
 
-        
-        self.engine=create_engine(f"postgresql://{username}:{password}@{host}:{port}/{dbname}")
+        self.engine = create_engine(f"postgresql://{username}:{password}@{host}:{port}/{dbname}")
 
     def get_engine(self):
         return self.engine

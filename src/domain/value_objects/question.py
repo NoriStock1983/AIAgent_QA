@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import re
 
+
 @dataclass(frozen=True)
 class Question:
     question: str
@@ -16,5 +17,5 @@ class Question:
         if re.search(r'[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>/?]', self.question):
             raise ValueError("質問事項に禁則文字が含まれています。")
 
-    def get_question(self)->str:
+    def get_question(self) -> str:
         return self.question

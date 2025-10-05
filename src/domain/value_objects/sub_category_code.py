@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from math import degrees
+
 
 @dataclass(frozen=True)
 class SubCategoryCode:

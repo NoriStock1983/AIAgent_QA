@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class MainCategoryName:
     main_category_name: str
@@ -10,7 +11,6 @@ class MainCategoryName:
 
         if len(self.main_category_name) > 255:
             raise ValueError("メインカテリーコードは255文字以内で入力してください。")
-
 
     def get_name(self):
         return self.main_category_name

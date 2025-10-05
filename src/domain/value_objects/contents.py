@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import re
 
+
 @dataclass(frozen=True)
 class Contents:
     contents: str
@@ -13,5 +14,5 @@ class Contents:
         if re.search(r'[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>/?]', self.contents):
             raise ValueError("Contentsに禁則文字が含まれています。")
 
-    def get_contents(self)->str:
+    def get_contents(self) -> str:
         return self.contents

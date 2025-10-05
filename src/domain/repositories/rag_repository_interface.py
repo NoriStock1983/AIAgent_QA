@@ -1,8 +1,6 @@
 
 # repositoryのいたーフェース
-
 from abc import ABCMeta, abstractmethod
-
 from domain.entities.insertragdata import InsertRagData
 from domain.entities.searchCondition import SearchCondition
 
@@ -22,4 +20,3 @@ class RAGRepositoryInterface(metaclass=ABCMeta):
         指定された質問と内容をRAGデータとして挿入します。
         """
         pass
-

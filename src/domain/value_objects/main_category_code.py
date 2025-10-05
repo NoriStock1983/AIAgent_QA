@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import re
 
+
 @dataclass(frozen=True)
 class MainCategoryCode:
     main_category_code: str

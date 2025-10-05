@@ -5,12 +5,13 @@ from domain.value_objects.main_category_code import MainCategoryCode
 from domain.value_objects.question import Question
 from domain.value_objects.sub_category_code import SubCategoryCode
 
+
 class AskQuestionUsecase:
     def __init__(self, repository: RAGRepositoryInterface, llm: BaseChatModel):
         self.repository = repository
         self.llm = llm
 
-    def execute(self,question:str,main_category_code:str,sub_category_code:str) -> str:
+    def execute(self, question: str, main_category_code: str, sub_category_code: str) -> str:
 
         condition = SearchCondition(
             question=Question(question=question),
