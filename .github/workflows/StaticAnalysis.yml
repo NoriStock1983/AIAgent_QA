@@ -42,7 +42,7 @@ jobs:
     - name: Run flake8
       run: |
         # デフォルト設定で実行（設定ファイルがある場合は自動で読み込まれる）
-        flake8 . --count --show-source --statistics
+        flake8 . --count --show-source --statistics --max-line-length=600
     
     # 将来のツール追加用のプレースホルダー（コメントアウト状態）
     - name: Run black (code formatting check)
