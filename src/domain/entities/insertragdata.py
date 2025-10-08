@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from domain.value_objects.contents import Contents
 from domain.value_objects.embedding import Embedding
 from domain.value_objects.main_category_code import MainCategoryCode
 from domain.value_objects.main_category_name import MainCategoryName
@@ -15,6 +16,7 @@ class InsertRagData:
     main_category_name: MainCategoryName
     sub_category_code: SubCategoryCode
     sub_category_name: SubCategoryName
+    contents: Contents
     metadata: MetaData
     embedding: Embedding
     created_at: str

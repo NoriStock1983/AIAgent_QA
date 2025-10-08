@@ -44,18 +44,26 @@ jobs:
         # デフォルト設定で実行（設定ファイルがある場合は自動で読み込まれる）
         flake8 . --count --show-source --statistics --max-line-length=600
     
-    # 将来のツール追加用のプレースホルダー（コメントアウト状態）
-    - name: Run black (code formatting check)
-      run: |
-         pip install black
-         black --check --diff .
-    
+    # blackによるコードフォーマットチェック
+    # blackはPythonのコードをフォーマットするツールです。
+    # フォーマットが異なる場合は、black-report.jsonに結果が出力されます。
+    #- name: Run black (code formatting check)
+    #  run: |
+    #     pip install black
+    #     black --check --diff .
+
+    # mypyによる静的型チェック
+    # mypyはPythonのコードを静的解析して、型のチェックを行うツールです。
+    # 型のチェックが異なる場合は、mypy-report.jsonに結果が出力されます。
     - name: Run mypy (type checking)
             # 静的型チェック
       run: |
          pip install mypy
          mypy .
     
+    # banditによるセキュリティチェック
+    # banditはPythonのコードを静的解析して、セキュリティの脆弱性を検出するツールです。
+    # 脆弱性がある場合は、bandit-report.jsonに結果が出力されます。
     - name: Run bandit (security check)
       run: |
         pip install bandit
