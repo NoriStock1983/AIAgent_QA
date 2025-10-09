@@ -12,3 +12,7 @@ check_untyped_defs = true
 warn_return_any = true
 # 利用されていない `noqa` コメントで警告する
 warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "langchain_core.*"
+ignore_missing_imports = true
