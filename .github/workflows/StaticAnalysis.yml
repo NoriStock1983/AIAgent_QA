@@ -43,14 +43,6 @@ jobs:
       run: |
         # デフォルト設定で実行（設定ファイルがある場合は自動で読み込まれる）
         flake8 . --count --show-source --statistics --max-line-length=600
-    
-    # blackによるコードフォーマットチェック
-    # blackはPythonのコードをフォーマットするツールです。
-    # フォーマットが異なる場合は、black-report.jsonに結果が出力されます。
-    #- name: Run black (code formatting check)
-    #  run: |
-    #     pip install black
-    #     black --check --diff .
 
     # mypyによる静的型チェック
     # mypyはPythonのコードを静的解析して、型のチェックを行うツールです。
