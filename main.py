@@ -1,10 +1,11 @@
+from dotenv import load_dotenv
 from adapters.controllers.llmAnswerController import LLMAnswerController
 from adapters.controllers.ragSearchController import RagSearchController
 from usecases.llmanswer.llmanswer_usecase import LLMAnswerUsecase
 from usecases.rag.ask_question_uescase import AskQuestionUsecase
 from infrastructures.repositories.rag_repository import RAGRepository
 from langchain_google_genai import ChatGoogleGenerativeAI
-from dotenv import load_dotenv
+
 
 load_dotenv()
 
