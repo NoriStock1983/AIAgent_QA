@@ -36,7 +36,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         # 静的解析ツールをインストール
-        pip install flake8
+        pip install flake8 sqlalchemy-stubs
     
     # flake8による静的解析
     - name: Run flake8

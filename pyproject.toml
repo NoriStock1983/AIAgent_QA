@@ -16,3 +16,11 @@ warn_unused_ignores = true
 [[tool.mypy.overrides]]
 module = "langchain_core.*"
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "langchain_google_genai.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "dotenv"
+ignore_missing_imports = true
