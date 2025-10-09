@@ -22,12 +22,6 @@ def main():
     llm_answer = llmanswer_controller.answer(result)
     print(llm_answer)
 
-    # RAGデータ挿入の例
-    # repository.insert(
-    #     question="Web会議用に外付けのWebカメラを貸してほしい",
-    #     contents="資産管理システムから「周辺機器貸出申請」を選択し、必要事項を記入して申請してください。"
-    # )
-
 
 if __name__ == "__main__":
     main()
