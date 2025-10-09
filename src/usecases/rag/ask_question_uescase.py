@@ -4,13 +4,19 @@ from domain.repositories.rag_repository_interface import RAGRepositoryInterface
 from domain.value_objects.main_category_code import MainCategoryCode
 from domain.value_objects.question import Question
 from domain.value_objects.sub_category_code import SubCategoryCode
+from logging import getLogger
+
+logger = getLogger(__name__)
+
 
 class AskQuestionUsecase:
     def __init__(self, repository: RAGRepositoryInterface, llm: BaseChatModel):
         self.repository = repository
         self.llm = llm
 
-    def execute(self,question:str,main_category_code:str,sub_category_code:str) -> str:
+    def execute(self, question: str, main_category_code: str, sub_category_code: str) -> str:
+
+        logger.info("AskQuestionUsecase.execute実行開始")
 
         condition = SearchCondition(
             question=Question(question=question),
@@ -21,6 +27,9 @@ class AskQuestionUsecase:
         result = self.repository.search(condition)
 
         if not result:
+            logger.info("AskQuestionUsecase.execute実行完了(回答が見つかりませんでした。)")
             return "回答が見つかりませんでした。"
+
+        logger.info("AskQuestionUsecase.execute実行完了")
 
         return result

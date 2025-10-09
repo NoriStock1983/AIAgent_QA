@@ -1,0 +1,26 @@
+[tool.mypy]
+# --- mypyに 'src' ディレクトリをソースのルートとして認識させる ---
+mypy_path = "src"
+
+# --- 名前空間パッケージとして認識させ、インポートエラーを防ぐ ---
+explicit_package_bases = true
+
+# --- その他の推奨設定 ---
+# 型ヒントがない関数の内部はチェックしない
+check_untyped_defs = true
+# Noneを返す可能性がある箇所で警告する
+warn_return_any = true
+# 利用されていない `noqa` コメントで警告する
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "langchain_core.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "langchain_google_genai.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "dotenv"
+ignore_missing_imports = true
