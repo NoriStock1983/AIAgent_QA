@@ -1,4 +1,4 @@
-from domain.entities.insertragdata import InsertRagData
+from domain.rag.entities.insertragdata import InsertRagData
 from usecases.rag.insert_rag_usecase import InsertRagUsecase
 
 

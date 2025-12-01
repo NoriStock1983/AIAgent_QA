@@ -1,8 +1,8 @@
 
 # repositoryのいたーフェース
 from abc import ABCMeta, abstractmethod
-from domain.entities.insertragdata import InsertRagData
-from domain.entities.searchCondition import SearchCondition
+from domain.rag.entities.insertragdata import InsertRagData
+from domain.rag.entities.searchCondition import SearchCondition
 
 
 class RAGRepositoryInterface(metaclass=ABCMeta):

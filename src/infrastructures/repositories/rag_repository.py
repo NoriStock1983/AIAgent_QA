@@ -1,9 +1,9 @@
 from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAIEmbeddings  # 変更
 from sqlalchemy import text
-from domain.entities.insertragdata import InsertRagData
-from domain.entities.searchCondition import SearchCondition
-from domain.repositories.rag_repository_interface import RAGRepositoryInterface
+from domain.rag.entities.insertragdata import InsertRagData
+from domain.rag.entities.searchCondition import SearchCondition
+from domain.rag.repositories.rag_repository_interface import RAGRepositoryInterface
 from infrastructures.dbaccess import DBAccess
 from logging import getLogger
 

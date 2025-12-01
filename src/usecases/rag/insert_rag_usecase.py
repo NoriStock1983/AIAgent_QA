@@ -1,5 +1,5 @@
-from domain.entities.insertragdata import InsertRagData
-from domain.repositories.rag_repository_interface import RAGRepositoryInterface
+from domain.rag.entities.insertragdata import InsertRagData
+from domain.rag.repositories.rag_repository_interface import RAGRepositoryInterface
 
 
 class InsertRagUsecase:

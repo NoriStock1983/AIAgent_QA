@@ -1,9 +1,9 @@
 from langchain_core.language_models.chat_models import BaseChatModel
-from domain.entities.searchCondition import SearchCondition
-from domain.repositories.rag_repository_interface import RAGRepositoryInterface
-from domain.value_objects.main_category_code import MainCategoryCode
-from domain.value_objects.question import Question
-from domain.value_objects.sub_category_code import SubCategoryCode
+from domain.rag.entities.searchCondition import SearchCondition
+from domain.rag.repositories.rag_repository_interface import RAGRepositoryInterface
+from domain.rag.value_objects.main_category_code import MainCategoryCode
+from domain.rag.value_objects.question import Question
+from domain.rag.value_objects.sub_category_code import SubCategoryCode
 from logging import getLogger
 
 logger = getLogger(__name__)

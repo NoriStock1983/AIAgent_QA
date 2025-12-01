@@ -1,4 +1,4 @@
-from domain.value_objects.main_category_code import MainCategoryCode
+from domain.rag.value_objects.main_category_code import MainCategoryCode
 from usecases.rag.ask_question_uescase import AskQuestionUsecase
 
 
