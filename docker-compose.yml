@@ -1,4 +1,4 @@
-services:
+ragservice:
   postgres:
     image: pgvector/pgvector:pg16
     container_name: postgres_pgvector
@@ -13,7 +13,7 @@ services:
       - ./db_setup:/docker-entrypoint-initdb.d
 
 # redisを立ち上げる
-  redis:
+  cashservice:
     image: redis:8.4.0
     container_name: rag_agent_qa_cache_server
     ports:
