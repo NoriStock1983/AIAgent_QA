@@ -17,30 +17,31 @@ load_dotenv()
 
 
 def main():
+
+    question = "WiFiに接続できません。"
+    repository = RAGRepository()
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
+    usecase = AskQuestionUsecase(repository=repository, llm=llm)
+    llmanswer_usecase = LLMAnswerUsecase(llm=llm)
+    rag_controller = RagSearchController(usecase=usecase)
+    llmanswer_controller = LLMAnswerController(usecase=llmanswer_usecase)
+    result = rag_controller.search(question)
+    print(result)
+    llm_answer = llmanswer_controller.answer(result)
+    print(llm_answer)
     # Redis接続
     redis_access = RedisAccess()
     redis_client = redis_access.get_client()
     
     # Redisへデータ挿入
-    redis_client.set("test", "test222")
+    redis_client.set(question, llm_answer)
 
     # Redisからデータ取得
-    print(redis_client.get("test"))
+    print("Redisからデータ取得")
+    print(redis_client.get(question))
 
     # Redis接続解除
     redis_access.close()
-
-    #repository = RAGRepository()
-    #llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
-    #usecase = AskQuestionUsecase(repository=repository, llm=llm)
-    #llmanswer_usecase = LLMAnswerUsecase(llm=llm)
-    #rag_controller = RagSearchController(usecase=usecase)
-    #llmanswer_controller = LLMAnswerController(usecase=llmanswer_usecase)
-    #result = rag_controller.search("WiFiに接続できません。")
-    #print(result)
-    #llm_answer = llmanswer_controller.answer(result)
-    #print(llm_answer)
-
 
 
 if __name__ == "__main__":
