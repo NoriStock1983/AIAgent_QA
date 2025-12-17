@@ -48,7 +48,6 @@ jobs:
     # mypyはPythonのコードを静的解析して、型のチェックを行うツールです。
     # 型のチェックが異なる場合は、mypy-report.jsonに結果が出力されます。
     - name: Run mypy (type checking)
-            # 静的型チェック
       run: |
          pip install mypy
          mypy .

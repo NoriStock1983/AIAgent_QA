@@ -1,8 +1,7 @@
 import sys
-from pathlib import Path
+import os
 
-# srcディレクトリをPythonパスに追加
-sys.path.insert(0, str(Path(__file__).parent / "src"))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 from dotenv import load_dotenv
 from adapters.controllers.llmAnswerController import LLMAnswerController
@@ -11,7 +10,7 @@ from usecases.llmanswer.llmanswer_usecase import LLMAnswerUsecase
 from usecases.rag.ask_question_uescase import AskQuestionUsecase
 from infrastructures.repositories.rag_repository import RAGRepository
 from langchain_google_genai import ChatGoogleGenerativeAI
-from usecases.cashe.cashe_usecase import CashUsecase
+from usecases.cashe.cache_usecase import CasheUsecase
 
 load_dotenv()
 
@@ -27,10 +26,10 @@ def main():
     llmanswer_controller = LLMAnswerController(usecase=llmanswer_usecase)
 
     # Redis接続
-    cash_usecase = CashUsecase()
+    cache_usecase = CasheUsecase()
 
     # Redisからデータ取得
-    answer = cash_usecase.select(question)
+    answer = cache_usecase.select(question)
 
     # もしredisからデータが取得できない場合、RAG内のデータを検索する。
     if not answer:
@@ -41,14 +40,12 @@ def main():
         llm_answer = llmanswer_controller.answer(result)
         print(llm_answer)
 
-        #Redisにデータを保存
-        cash_usecase.insert(question, llm_answer)
+        # Redisにデータを保存
+        cache_usecase.insert(question, llm_answer)
 
     else:
         print("Redisからデータを取得しました。")
         print(answer)
-
-
 
 if __name__ == "__main__":
     main()

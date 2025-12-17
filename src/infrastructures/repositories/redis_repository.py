@@ -1,9 +1,11 @@
 from logging import getLogger
-from src.domain.cashe.entities.searchRedis import SearchRedis
-from src.domain.cashe.repositories.redis_repository_interface import RedisRepositoryInterface
-from src.infrastructures.redisaccess import RedisAccess
+from domain.cache.entities.searchRedis import SearchRedis
+from domain.cache.repositories.redis_repository_interface import RedisRepositoryInterface
+from infrastructures.redisaccess import RedisAccess
+from datetime import datetime
 
 logger = getLogger(__name__)
+
 
 class RedisRepository(RedisRepositoryInterface):
     def __init__(self):
@@ -21,7 +23,7 @@ class RedisRepository(RedisRepositoryInterface):
         client = self.redis_access.get_client()
         key = f"search:{query}"
         answer = client.get(key)
-        
+
         if answer:
             logger.info("RedisRepository.search実行完了: データあり")
             return SearchRedis(query=query, answer=answer)

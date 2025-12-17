@@ -20,7 +20,6 @@ class LLMAnswerUsecase:
 
         return response
 
-
     def _build_answer(self, rag_answer: str) -> str:
         message = [
             SystemMessage(content="あなたは、企業の情報システム部のサービスデスク担当者です。"),

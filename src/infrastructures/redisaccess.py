@@ -5,6 +5,7 @@ from logging import getLogger
 
 logger = getLogger(__name__)
 
+
 class RedisAccess:
     def __init__(self):
         logger.info("RedisAccess.init実行開始")
@@ -13,7 +14,7 @@ class RedisAccess:
         self.host = os.getenv("REDIS_HOST")
         self.port = int(os.getenv("REDIS_PORT"))
         self.password = os.getenv("REDIS_PASSWORD")
-        
+
         # Docker Compose service name might be used as host if running inside container,
         # but for local development it might be localhost.
         # The docker-compose.yml maps 6379:6379, so localhost:6379 should work from host.
@@ -23,7 +24,7 @@ class RedisAccess:
                 host=self.host,
                 port=self.port,
                 password=self.password,
-                decode_responses=True # Returns strings instead of bytes
+                decode_responses=True
             )
             # Connection check
             self.client.ping()

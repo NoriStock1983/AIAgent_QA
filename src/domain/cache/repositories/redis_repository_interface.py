@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from domain.cashe.entities.searchRedis import SearchRedis
+from src.domain.cache.entities.searchRedis import SearchRedis
 
 
 class RedisRepositoryInterface(ABC):

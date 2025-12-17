@@ -1,7 +1,7 @@
 from domain.rag.value_objects.main_category_code import MainCategoryCode
 from usecases.rag.ask_question_uescase import AskQuestionUsecase
 
-### RAG内のデータを検索する。
+
 class RagSearchController:
     def __init__(self, usecase: AskQuestionUsecase):
         self.usecase = usecase
